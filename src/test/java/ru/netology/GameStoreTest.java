@@ -29,16 +29,15 @@ public class GameStoreTest {
     public void shouldNotContainsGame() {
         GameStore store1 = new GameStore();
         Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
-        Game game1 = new Game("GTA V", "Экшен",store1);
+        Game game1 = new Game("GTA V", "Экшен", store1);
         assertFalse(store.containsGame(game1));
     }
 
     @Test
     public void shouldAddPlayTime() {
 
-        Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
-        game.getStore().addPlayTime("Vasya", 5);
-        game.getStore().addPlayTime("Petya", 4);
+        store.addPlayTime("Vasya", 5);
+        store.addPlayTime("Petya", 4);
 
         String expected = "Vasya";
         String actual = store.getMostPlayer();
@@ -48,7 +47,6 @@ public class GameStoreTest {
     @Test
     public void shouldAddPlayTimeSum() {
 
-        Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
         store.addPlayTime("Vasya", 3);
         store.addPlayTime("Petya", 4);
         store.addPlayTime("Vasya", 5);
