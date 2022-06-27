@@ -20,6 +20,18 @@ public class PlayerTest {
   }
   
   @Test
+  public void shouldInstallGame() {
+    GameStore store = new GameStore();
+    Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+    Player player = new Player("Ivan");
+    player.installGame(game);
+    player.play(game, 2);
+    player.installGame(game);
+    
+    assertEquals(2, player.sumGenre("Аркады"));
+  }
+  
+  @Test
   public void shouldDoNothingIfGameAlreadyInstalled() {
     GameStore store = new GameStore();
     Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
@@ -78,6 +90,19 @@ public class PlayerTest {
     Game actual = player.mostPlayerByGenre("Экшен");
     
     assertEquals(expected, actual);   
+  }
+  
+  @Test
+  public void shouldReturnNullForNotPlayingGenre() {
+    GameStore store = new GameStore();
+    Game game = store.publishGame("GTA V", "Экшен");
+    
+    Player player = new Player("Petya");
+    player.installGame(game);
+    player.play(game, 3);
+    
+    Game actual = player.mostPlayerByGenre("Аркады");
+    assertNull(actual);
   }
   
   @Test
