@@ -20,18 +20,6 @@ public class PlayerTest {
   }
   
   @Test
-  public void shouldInstallGame() {
-    
-    GameStore store = new GameStore();
-    Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
-    
-    Player player = new Player("Ivan");
-    player.installGame(game);
-    
-    assertTrue(store.containsGame(game));
-  }
-  
-  @Test
   public void shouldDoNothingIfGameAlreadyInstalled() {
     GameStore store = new GameStore();
     Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
@@ -89,8 +77,7 @@ public class PlayerTest {
     Game expected = game1;
     Game actual = player.mostPlayerByGenre("Экшен");
     
-    assertEquals(expected, actual);
-    
+    assertEquals(expected, actual);   
   }
   
   @Test
