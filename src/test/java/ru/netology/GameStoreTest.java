@@ -22,7 +22,8 @@ public class GameStoreTest {
     @Test
     public void shouldContainsGame() {
         Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
-        assertTrue(store.containsGame(game));
+        Game game1 = store.publishGame("GTA V", "Экшен");
+        assertTrue(store.containsGame(game1));
     }
 
     @Test
@@ -65,6 +66,14 @@ public class GameStoreTest {
         String actual = store.getMostPlayer();
         assertEquals(expected, actual);
     }
+    @Test
+    public void shouldGetOneMostPlayer() {
+
+        store.addPlayTime("Vasya", 1);
+        String expected = "Vasya";
+        String actual = store.getMostPlayer();
+        assertEquals(expected, actual);
+    }
 
     @Test
     public void shouldNoGetMostPlayer() {
@@ -73,7 +82,7 @@ public class GameStoreTest {
     }
 
     @Test
-    void getSumPlayedTime() {
+    public void shouldGetSumPlayedTime() {
         store.addPlayTime("Vasya", 3);
         store.addPlayTime("Petya", 0);
         store.addPlayTime("Vanya", 20);
