@@ -11,9 +11,9 @@ public class Player {
     значение - суммарное количество часов игры в эту игру */
     private Map<Game, Integer> playedTime = new HashMap<>();
 
-    public Map<Game, Integer> getPlayedTime() {
-        return playedTime;
-    }
+//    public Map<Game, Integer> getPlayedTime() {
+//        return playedTime;
+//    }
 
     public Player(String name) {
         this.name = name;
@@ -38,11 +38,10 @@ public class Player {
     если игра не была установлена, то надо выкидывать RuntimeException */
     public int play(Game game, int hours) {
         game.getStore().addPlayTime(name, hours);
-        if (playedTime.containsKey(game)) {
-            playedTime.put(game, playedTime.get(game));
-        } else {
-            playedTime.put(game, hours);
+        if (!playedTime.containsKey(game)){
+            throw new RuntimeException("Игра не установлена");
         }
+        playedTime.put(game, playedTime.get(game)+hours);
         return playedTime.get(game);
     }
 
